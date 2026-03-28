@@ -152,6 +152,21 @@ input {
   border: 1px solid var(--line);
 }
 
+.toolbar-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.accent-button {
+  background: var(--ink);
+  color: white;
+}
+
+.toolbar-copy {
+  margin: 0 0 16px;
+}
+
 .canvas-stage-shell {
   padding: 18px;
   min-height: 620px;
@@ -163,6 +178,28 @@ input {
   gap: 16px;
   align-items: center;
   margin-bottom: 16px;
+}
+
+.canvas-badge {
+  min-width: 120px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-alt);
+}
+
+.canvas-badge strong,
+.selection-card strong,
+.snapshot-card strong,
+.layer-main-button strong {
+  display: block;
+}
+
+.canvas-badge span,
+.selection-card span,
+.snapshot-card span,
+.layer-main-button span {
+  color: var(--muted);
 }
 
 .canvas-viewport {
@@ -178,32 +215,117 @@ input {
   background-size: 24px 24px;
 }
 
-.canvas-placeholder {
+.canvas-surface {
   width: min(900px, 100%);
   aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
   border-radius: 18px;
   border: 1px solid rgba(30, 37, 35, 0.12);
   background: linear-gradient(180deg, #fff 0%, #fbf7ef 100%);
   padding: 24px;
 }
 
-.canvas-placeholder-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 28px;
+.workspace-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px;
+  text-align: left;
+  border-style: solid;
+  border-radius: 18px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(31, 38, 35, 0.08);
 }
 
-.placeholder-card {
-  min-height: 140px;
-  padding: 16px;
+.workspace-node-circle {
+  border-radius: 999px;
+}
+
+.workspace-node-text {
+  justify-content: flex-start;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-style: dashed;
+}
+
+.workspace-node.selected {
+  outline: 3px solid rgba(31, 111, 120, 0.2);
+  outline-offset: 3px;
+}
+
+.workspace-node.hidden {
+  opacity: 0.35;
+}
+
+.workspace-node.locked {
+  box-shadow: inset 0 0 0 2px rgba(30, 37, 35, 0.2);
+}
+
+.node-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(30, 37, 35, 0.7);
+}
+
+.layer-stack,
+.snapshot-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.layer-card,
+.selection-card,
+.snapshot-card {
+  padding: 14px;
   border-radius: 16px;
   border: 1px solid var(--line);
   background: rgba(247, 241, 231, 0.65);
 }
 
-.placeholder-card.accent {
-  background: linear-gradient(135deg, rgba(31, 111, 120, 0.18), rgba(235, 139, 45, 0.18));
+.layer-card.selected {
+  background: rgba(31, 111, 120, 0.1);
+  border-color: rgba(31, 111, 120, 0.3);
+}
+
+.layer-main-button,
+.snapshot-card {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+}
+
+.layer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mini-button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.selection-card p,
+.snapshot-card,
+.layer-card {
+  color: var(--muted);
+}
+
+.snapshot-section {
+  margin-top: 20px;
 }
 
 @media (max-width: 1080px) {
@@ -231,5 +353,10 @@ input {
   .canvas-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .canvas-surface {
+    width: 100% !important;
+    height: 520px !important;
   }
 }
