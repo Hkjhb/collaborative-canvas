@@ -1,0 +1,235 @@
+:root {
+  --bg: #f3efe7;
+  --surface: #fffdf9;
+  --surface-alt: #f7f1e7;
+  --ink: #1e2523;
+  --muted: #66706c;
+  --line: rgba(30, 37, 35, 0.1);
+  --accent: #1f6f78;
+  --accent-strong: #124b52;
+  --warm: #eb8b2d;
+  --shadow: 0 20px 60px rgba(31, 38, 35, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(31, 111, 120, 0.12), transparent 28%),
+    linear-gradient(180deg, #fcf8f2 0%, var(--bg) 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.landing-shell,
+.editor-page {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.landing-shell {
+  display: grid;
+  place-items: center;
+}
+
+.landing-card,
+.editor-shell {
+  background: rgba(255, 253, 249, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.landing-card {
+  width: min(720px, 100%);
+  padding: 40px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.landing-card h1,
+.panel-title,
+.canvas-title {
+  margin: 0;
+}
+
+.landing-copy {
+  max-width: 52ch;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.primary-link,
+.toolbar-button,
+.panel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.primary-link {
+  margin-top: 24px;
+  padding: 14px 22px;
+  background: var(--ink);
+  color: white;
+}
+
+.primary-link:hover,
+.toolbar-button:hover,
+.panel-button:hover {
+  transform: translateY(-1px);
+}
+
+.editor-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 280px;
+  gap: 18px;
+  padding: 18px;
+}
+
+.editor-column {
+  min-width: 0;
+}
+
+.editor-panel,
+.canvas-stage-shell,
+.toolbar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.editor-panel {
+  padding: 18px;
+}
+
+.editor-panel p,
+.toolbar-copy,
+.canvas-subtitle,
+.empty-state {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.toolbar-button,
+.panel-button {
+  padding: 10px 14px;
+  background: var(--surface-alt);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.canvas-stage-shell {
+  padding: 18px;
+  min-height: 620px;
+}
+
+.canvas-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.canvas-viewport {
+  display: grid;
+  place-items: center;
+  min-height: 520px;
+  border-radius: 20px;
+  border: 1px dashed rgba(30, 37, 35, 0.2);
+  background:
+    linear-gradient(90deg, rgba(31, 111, 120, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(31, 111, 120, 0.04) 1px, transparent 1px),
+    #fff;
+  background-size: 24px 24px;
+}
+
+.canvas-placeholder {
+  width: min(900px, 100%);
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 37, 35, 0.12);
+  background: linear-gradient(180deg, #fff 0%, #fbf7ef 100%);
+  padding: 24px;
+}
+
+.canvas-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.placeholder-card {
+  min-height: 140px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(247, 241, 231, 0.65);
+}
+
+.placeholder-card.accent {
+  background: linear-gradient(135deg, rgba(31, 111, 120, 0.18), rgba(235, 139, 45, 0.18));
+}
+
+@media (max-width: 1080px) {
+  .editor-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .landing-shell,
+  .editor-page {
+    padding: 14px;
+  }
+
+  .landing-card,
+  .editor-shell {
+    border-radius: 22px;
+    padding: 16px;
+  }
+
+  .canvas-placeholder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
