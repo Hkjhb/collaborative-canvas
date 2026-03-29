@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useWorkspaceStore } from "@/store/workspaceStore";
 
@@ -14,12 +15,23 @@ export function RightSidebar() {
   const restoreSnapshot = useWorkspaceStore((state) => state.restoreSnapshot);
 
   return (
-    <aside className="editor-panel">
+    <motion.aside
+      className="editor-panel"
+      initial={{ opacity: 0, x: 12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.35 }}
+    >
       <p className="eyebrow">Workspace State</p>
       <h2 className="panel-title">Selection + History</h2>
 
       {selectedElement ? (
-        <div className="selection-card">
+        <motion.div
+          className="selection-card"
+          key={selectedElement.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.22 }}
+        >
           <strong>{selectedElement.name}</strong>
           <span>
             {selectedElement.type} | {selectedElement.width} x {selectedElement.height}
@@ -31,7 +43,7 @@ export function RightSidebar() {
             Visible: {selectedElement.visible ? "Yes" : "No"} | Locked:{" "}
             {selectedElement.locked ? "Yes" : "No"}
           </p>
-        </div>
+        </motion.div>
       ) : (
         <p className="empty-state">
           No element selected yet. Click any workspace node or layer item to sync selection into
@@ -44,16 +56,18 @@ export function RightSidebar() {
         {snapshots.length > 0 ? (
           <div className="snapshot-stack">
             {snapshots.map((snapshot) => (
-              <button
+              <motion.button
                 key={snapshot.id}
                 type="button"
                 className="snapshot-card"
                 onClick={() => restoreSnapshot(snapshot.id)}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.99 }}
               >
                 <strong>{snapshot.label}</strong>
                 <span>{snapshot.createdAt}</span>
                 <span>{snapshot.elements.length} elements captured</span>
-              </button>
+              </motion.button>
             ))}
           </div>
         ) : (
@@ -74,6 +88,6 @@ export function RightSidebar() {
       {selectedElementId ? (
         <p className="toolbar-copy">Active selection id: {selectedElementId}</p>
       ) : null}
-    </aside>
+    </motion.aside>
   );
 }
