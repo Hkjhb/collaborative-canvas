@@ -60,7 +60,8 @@ export function Toolbar() {
 
       <p className="toolbar-copy">
         Shared workspace store is active. Selected element state, element list, and snapshots are
-        now managed in Zustand. Snapshots saved: {snapshotCount}
+        now managed in Zustand. Snapshots saved: {snapshotCount}. Shortcuts: Ctrl/Cmd + D to
+        duplicate, Delete or Backspace to remove the selected element.
       </p>
     </>
   );

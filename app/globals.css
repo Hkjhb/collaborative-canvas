@@ -215,61 +215,39 @@ input {
   background-size: 24px 24px;
 }
 
-.canvas-surface {
+.konva-shell {
   width: min(900px, 100%);
-  aspect-ratio: 16 / 10;
-  position: relative;
-  overflow: hidden;
+}
+
+.canvas-instructions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.canvas-loading {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--muted);
+}
+
+.konva-frame {
+  width: min(900px, 100%);
   border-radius: 18px;
   border: 1px solid rgba(30, 37, 35, 0.12);
   background: linear-gradient(180deg, #fff 0%, #fbf7ef 100%);
-  padding: 24px;
+  padding: 18px;
+  overflow: hidden;
 }
 
-.workspace-node {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 12px;
-  text-align: left;
-  border-style: solid;
-  border-radius: 18px;
-  cursor: pointer;
-  box-shadow: 0 12px 30px rgba(31, 38, 35, 0.08);
-}
-
-.workspace-node-circle {
-  border-radius: 999px;
-}
-
-.workspace-node-text {
-  justify-content: flex-start;
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
-  border-style: dashed;
-}
-
-.workspace-node.selected {
-  outline: 3px solid rgba(31, 111, 120, 0.2);
-  outline-offset: 3px;
-}
-
-.workspace-node.hidden {
-  opacity: 0.35;
-}
-
-.workspace-node.locked {
-  box-shadow: inset 0 0 0 2px rgba(30, 37, 35, 0.2);
-}
-
-.node-label {
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(30, 37, 35, 0.7);
+.konva-frame canvas {
+  border-radius: 16px;
 }
 
 .layer-stack,
@@ -355,8 +333,8 @@ input {
     align-items: flex-start;
   }
 
-  .canvas-surface {
+  .konva-frame,
+  .konva-shell {
     width: 100% !important;
-    height: 520px !important;
   }
 }

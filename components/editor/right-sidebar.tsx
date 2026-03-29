@@ -1,11 +1,14 @@
 "use client";
 
+import { useMemo } from "react";
 import { useWorkspaceStore } from "@/store/workspaceStore";
 
 export function RightSidebar() {
+  const elements = useWorkspaceStore((state) => state.elements);
   const selectedElementId = useWorkspaceStore((state) => state.selectedElementId);
-  const selectedElement = useWorkspaceStore((state) =>
-    state.elements.find((element) => element.id === state.selectedElementId) ?? null
+  const selectedElement = useMemo(
+    () => elements.find((element) => element.id === selectedElementId) ?? null,
+    [elements, selectedElementId]
   );
   const snapshots = useWorkspaceStore((state) => state.snapshots);
   const restoreSnapshot = useWorkspaceStore((state) => state.restoreSnapshot);
@@ -19,13 +22,13 @@ export function RightSidebar() {
         <div className="selection-card">
           <strong>{selectedElement.name}</strong>
           <span>
-            {selectedElement.type} · {selectedElement.width} x {selectedElement.height}
+            {selectedElement.type} | {selectedElement.width} x {selectedElement.height}
           </span>
           <p>
             Position: {selectedElement.x}, {selectedElement.y}
           </p>
           <p>
-            Visible: {selectedElement.visible ? "Yes" : "No"} · Locked:{" "}
+            Visible: {selectedElement.visible ? "Yes" : "No"} | Locked:{" "}
             {selectedElement.locked ? "Yes" : "No"}
           </p>
         </div>
@@ -58,6 +61,14 @@ export function RightSidebar() {
             Save a snapshot from the toolbar to capture a restorable workspace state.
           </p>
         )}
+      </div>
+
+      <div className="snapshot-section">
+        <p className="eyebrow">Editor Hints</p>
+        <p className="toolbar-copy">
+          Use the toolbar or keyboard shortcuts to create and manage elements. Drag on the canvas
+          to reposition shapes and use the selection handles to resize them.
+        </p>
       </div>
 
       {selectedElementId ? (

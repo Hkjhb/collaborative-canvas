@@ -1,17 +1,20 @@
 "use client";
 
+import { useMemo } from "react";
 import { useWorkspaceStore } from "@/store/workspaceStore";
 
 export function LeftSidebar() {
   const workspaceName = useWorkspaceStore((state) => state.workspaceName);
-  const elements = useWorkspaceStore((state) =>
-    [...state.elements].sort((left, right) => right.layerOrder - left.layerOrder)
-  );
+  const elements = useWorkspaceStore((state) => state.elements);
   const selectedElementId = useWorkspaceStore((state) => state.selectedElementId);
   const selectElement = useWorkspaceStore((state) => state.selectElement);
   const reorderElement = useWorkspaceStore((state) => state.reorderElement);
   const toggleVisibility = useWorkspaceStore((state) => state.toggleVisibility);
   const toggleLock = useWorkspaceStore((state) => state.toggleLock);
+  const orderedElements = useMemo(
+    () => [...elements].sort((left, right) => right.layerOrder - left.layerOrder),
+    [elements]
+  );
 
   return (
     <aside className="editor-panel">
@@ -23,7 +26,7 @@ export function LeftSidebar() {
       </p>
 
       <div className="layer-stack">
-        {elements.map((element) => {
+        {orderedElements.map((element) => {
           const isSelected = element.id === selectedElementId;
 
           return (
@@ -35,15 +38,23 @@ export function LeftSidebar() {
               >
                 <strong>{element.name}</strong>
                 <span>
-                  {element.type} · layer {element.layerOrder + 1}
+                  {element.type} | layer {element.layerOrder + 1}
                 </span>
               </button>
 
               <div className="layer-actions">
-                <button type="button" className="mini-button" onClick={() => toggleVisibility(element.id)}>
+                <button
+                  type="button"
+                  className="mini-button"
+                  onClick={() => toggleVisibility(element.id)}
+                >
                   {element.visible ? "Hide" : "Show"}
                 </button>
-                <button type="button" className="mini-button" onClick={() => toggleLock(element.id)}>
+                <button
+                  type="button"
+                  className="mini-button"
+                  onClick={() => toggleLock(element.id)}
+                >
                   {element.locked ? "Unlock" : "Lock"}
                 </button>
                 <button
