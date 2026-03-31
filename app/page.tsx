@@ -1,5 +1,5 @@
-import { LandingHero } from "@/components/landing/landing-hero";
+import { EditorShell } from "@/components/editor/editor-shell";
 
 export default function HomePage() {
-  return <LandingHero />;
+  return <EditorShell />;
 }
