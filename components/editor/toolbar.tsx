@@ -7,6 +7,7 @@ import {
   RectangleHorizontal, Trash2, Type, Undo2,
 } from "lucide-react";
 import { type CanvasElementStyle, useWorkspaceStore } from "@/store/workspaceStore";
+import { DarkSelect } from "@/components/editor/dark-select";
 
 const FONTS = [
   "Inter", "Roboto", "Montserrat", "Oswald",
@@ -121,27 +122,21 @@ export function Toolbar() {
           >
             <div className="toolbar-divider" />
 
-            <select
-              className="toolbar-select"
+            <DarkSelect
+              className="toolbar-select-wrap"
+              buttonClassName="toolbar-select"
               value={selectedElement.style.fontFamily}
-              onChange={(e) => updateElementStyle(selectedElement.id, { fontFamily: e.target.value })}
-              title="Font Family"
-            >
-              {FONTS.map((f) => (
-                <option key={f} value={f}>{f}</option>
-              ))}
-            </select>
+              onChange={(value) => updateElementStyle(selectedElement.id, { fontFamily: value })}
+              options={FONTS.map((font) => ({ label: font, value: font }))}
+            />
 
-            <select
-              className="toolbar-select toolbar-select-sm"
+            <DarkSelect
+              className="toolbar-select-wrap toolbar-select-wrap-sm"
+              buttonClassName="toolbar-select toolbar-select-sm"
               value={selectedElement.style.fontSize}
-              onChange={(e) => updateElementStyle(selectedElement.id, { fontSize: Number(e.target.value) })}
-              title="Font Size"
-            >
-              {FONT_SIZES.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+              onChange={(value) => updateElementStyle(selectedElement.id, { fontSize: Number(value) })}
+              options={FONT_SIZES.map((size) => ({ label: String(size), value: size }))}
+            />
 
             <button
               type="button"

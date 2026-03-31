@@ -8,6 +8,7 @@ import {
   RectangleHorizontal, Type,
 } from "lucide-react";
 import { useWorkspaceStore } from "@/store/workspaceStore";
+import { DarkSelect } from "@/components/editor/dark-select";
 
 const TYPE_ICONS = {
   rectangle: RectangleHorizontal,
@@ -153,13 +154,13 @@ export function RightSidebar() {
                 {/* Font family */}
                 <div className="inspector-row inspector-row-col" style={{ marginBottom: 8 }}>
                   <label className="inspector-label">Font</label>
-                  <select
-                    className="inspector-select"
+                  <DarkSelect
+                    className="inspector-select-wrap"
+                    buttonClassName="inspector-select"
                     value={selectedElement.style.fontFamily}
-                    onChange={(e) => updateElementStyle(selectedElement.id, { fontFamily: e.target.value })}
-                  >
-                    {FONTS.map((f) => <option key={f} value={f}>{f}</option>)}
-                  </select>
+                    onChange={(value) => updateElementStyle(selectedElement.id, { fontFamily: value })}
+                    options={FONTS.map((font) => ({ label: font, value: font }))}
+                  />
                 </div>
 
                 {/* Bold / Italic */}
